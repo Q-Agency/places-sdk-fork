@@ -33,15 +33,16 @@ class FlutterGooglePlacesSdkMethodChannel
     return _invokeForSettings('updateSettings', apiKey, locale);
   }
 
-  Future<void> _invokeForSettings(String methodName, String apiKey, Locale? locale) {
+  Future<void> _invokeForSettings(
+      String methodName, String apiKey, Locale? locale) {
     return _channel.invokeMethod<void>(methodName, {
       'apiKey': apiKey,
       'locale': locale == null
           ? null
           : {
-        'country': locale.countryCode,
-        'language': locale.languageCode,
-      },
+              'country': locale.countryCode,
+              'language': locale.languageCode,
+            },
     });
   }
 
@@ -102,6 +103,7 @@ class FlutterGooglePlacesSdkMethodChannel
   }
 
   FetchPlaceResponse _responseFromPlaceDetails(dynamic value) {
+    print('#### SRANJE:' + value.toString());
     final Place? place =
         value == null ? null : Place.fromJson(value.cast<String, dynamic>());
     return FetchPlaceResponse(place);
